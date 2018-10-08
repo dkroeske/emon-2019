@@ -7,8 +7,8 @@
       <mat-progress-bar mode="determinate" [value]="updateCounter$"></mat-progress-bar>
     </div>
 
-  <div class="box2"></div>
-  <div class="box2"></div>
+    <div class="box2"></div>
+    <div class="box2"></div>
 
     <div class="box2">
       <div *ngIf="polledPower$ < 0 || polledPower$ === 0">
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="box3">
+    <div class="graph">
       <app-power-line-chart [data]="polledPowerArray"></app-power-line-chart>
     </div>
 
