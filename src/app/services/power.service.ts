@@ -1,24 +1,43 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-
-import {Power} from '../models/power.model';
+import {map, catchError, tap} from 'rxjs/operators';
+import {PowerItem} from '../models/power.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PowerService {
 
-  readonly url = 'https://emon.ovh:8080/api/power?limit=10';
+  readonly url = 'https://api.emon.ovh:8080';
 
   constructor(private http: HttpClient) {}
 
-  getPower(): Observable<Power[]> {
-    return this.http.get<Power[]>(this.url)
-      .pipe( map( powerItem => {
-          return powerItem;
-      }));
+  getPower( signature: string, startDate: Date, endDate: Date, interval: number ): Observable<PowerItem[]> {
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    let params = new HttpParams();
+
+    signature ? params = params.append('signature', signature) : {};
+    startDate ? params = params.append('startDate', startDate.toISOString()) : {};
+    endDate ? params = params.append('endDate', endDate.toISOString()) : {};
+    interval ? params = params.append('interval', interval.toString()) : {};
+
+
+    return this.http.get<any>(this.url + '/api/powerSeries', {headers: headers, params: params})
+    .pipe(
+      map( (data) => {
+          return data.map( (item) => {
+            const pwr = item.avg_p_prod_kw - item.avg_p_cons_kw;
+            const tm = item.startDate;
+            const unit = 'kW';
+            return new PowerItem(new Date(tm), pwr, unit);
+        });
+      })
+    );
   }
 
 }
+
+
