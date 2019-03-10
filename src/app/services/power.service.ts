@@ -13,7 +13,7 @@ export class PowerService {
 
   constructor(private http: HttpClient) {}
 
-  getPower( signature: string, startDate: Date, endDate: Date, interval: number ): Observable<PowerItem[]> {
+  getPowerSeries(signature: string, startDate: Date, endDate: Date, interval: number ): Observable<PowerItem[]> {
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 

@@ -23,8 +23,6 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
       const produced: number[] = [];
       const consumed: number[] = [];
 
-      console.log(this.dataSeries);
-
       this.dataSeries.forEach( item => {
         if ( item.value >= 0 ) {
           produced.push( item.value * 1000 );
@@ -55,17 +53,19 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
           {
             label: 'Produced',
             data: [], // Produced
-            borderColor: 'rgba(0,220,0,1.0)',
-            backgroundColor: 'rgba(0,220,0,0.4)',
+            pointRadius: 0,
+            borderColor: 'rgba(28,167,79,0.6)',
+            backgroundColor: 'rgba(28,167,79,0.4)',
             fill: true
           },
           {
             label: 'Consumed',
             data: [], // consumed
-            borderColor: 'rgba(220,0,0,1.0)',
-            backgroundColor: 'rgba(220,0,0,0.4)',
+            pointRadius: 0,
+            borderColor: 'rgba(69,136,193,0.6)',
+            backgroundColor: 'rgba(69,136,193,0.4)',
             fill: true
-          }
+          },
         ]
       },
       options: {

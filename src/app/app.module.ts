@@ -9,12 +9,16 @@ import {MaterialModule} from './MaterialModule';
 import {PowerService} from './services/power.service';
 import { DailyPowerGraphComponent } from './dailypower/dailypowergraph/daily-power-graph.component';
 import { DailypowerComponent } from './dailypower/dailypower.component';
+import { GaugeComponent } from './gauge/gauge.component';
+import { PowerGaugeComponent } from './power-gauge/power-gauge.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DailyPowerGraphComponent,
-    DailypowerComponent
+    DailypowerComponent,
+    GaugeComponent,
+    PowerGaugeComponent,
   ],
   imports: [
     BrowserModule,
