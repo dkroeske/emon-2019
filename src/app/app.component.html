@@ -1,31 +1,17 @@
-<!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">-->
+<div class="container">
 
-<!--<div class="container">-->
+  <div class="header">
+    <h4>Power@4813ct</h4>
+  </div>
 
-    <!--<div class="box1">-->
-      <!--<h4 class="mat-subheader">InstaPower@Coolsmastraat</h4>-->
-      <!--<mat-progress-bar mode="determinate" [value]="updateCounter$"></mat-progress-bar>-->
-    <!--</div>-->
+  <div class="daily_power_graph_container">
+    <app-dailypower></app-dailypower>
+  </div>
 
-    <!--<div class="box2"></div>-->
-    <!--<div class="box2"></div>-->
+</div>
 
-    <!--<div class="box2">-->
-      <!--<div *ngIf="polledPower$ < 0 || polledPower$ === 0">-->
-        <!--<p class="mat-headline mat-error">{{polledPower$ * -1}} {{polledUnit$}}</p>-->
-        <!--<p class="mat-subheader">You are consuming!</p>-->
-      <!--</div>-->
-      <!--<div *ngIf="polledPower$ > 0">-->
-        <!--<p class="mat-headline mat-active">{{polledPower$}} {{polledUnit$}}</p>-->
-        <!--<p class="mat-subheader">You are producing!</p>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="graph">-->
-      <!--<app-power-line-chart [data]="polledPowerArray"></app-power-line-chart>-->
-    <!--</div>-->
-
+<!--<div class="instapowergraph">-->
+  <!--<app-power-gauge></app-power-gauge>-->
 <!--</div>-->
-<!---->
-<app-power-gauge></app-power-gauge>
-<router-outlet></router-outlet>
+
+<!--<router-outlet></router-outlet>-->
