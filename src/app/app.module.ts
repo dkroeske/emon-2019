@@ -9,9 +9,13 @@ import {MaterialModule} from './MaterialModule';
 import {PowerService} from './services/power.service';
 import { DailyPowerGraphComponent } from './dailypower/dailypowergraph/daily-power-graph.component';
 import { DailypowerComponent } from './dailypower/dailypower.component';
-import { GaugeComponent } from './gauge/gauge.component';
-import {InfoService} from './services/info.service';
-import { InfoComponent } from './info/info.component';
+import { GaugeComponent } from './live-power/power-gauge/gauge.component';
+import { InfoService} from './services/info.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyDashBoardComponent } from './my-dash-board/my-dash-board.component';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
+import { LivePowerComponent } from './live-power/live-power.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +23,22 @@ import { InfoComponent } from './info/info.component';
     DailyPowerGraphComponent,
     DailypowerComponent,
     GaugeComponent,
-    InfoComponent,
+    DashboardComponent,
+    MyDashBoardComponent,
+    LivePowerComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule
   ],
   providers: [PowerService, InfoService],
   bootstrap: [AppComponent]

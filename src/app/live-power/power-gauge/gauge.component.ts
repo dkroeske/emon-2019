@@ -71,7 +71,7 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
     ctx.fillStyle = 'rgba(28,167,79,1.0)';
     ctx.font = 'normal 30px Arial';
     //let text = ((this.degrees / 240) * this.maxValue).toFixed(0);
-    const text = this.value.toFixed(0) + 'W';
+    const text = this.value.toFixed(0);
 
     ctx.fillText(text, midWidth - ctx.measureText(text).width / 2.0, midHeigth + 15);
     ctx.font = 'lighter small-caps 14px Arial';

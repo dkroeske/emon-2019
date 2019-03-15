@@ -1,44 +1,5 @@
 //Leaf Electrical
-
-.container {
-  display: flex;
-  //animation: 2s appear;
-}
-
-.header {
-  flex: 0 1 100px;
-  //width: 100%;
-  background-color: #D6E9FE;
-  //justify-content: center;
-}
-
-.a {
-  flex: 1 1 auto;
-  background-color: #ff0;
-}
-
-.b {
-  flex: 1 1 100px;
-  background-color: #0ff;
-
-}
-
-//.graph_container {
-//  display: flex;
-//  width: 100%;
-//  min-width: 0;
-//  justify-content: space-evenly;
-//  flex-wrap: nowrap;
-//}
-//
-//.graph_container > .a {
-//  //display:flex;
-//  display: block;
-//}
-//.graph_container > .b {
-//  //display:flex;
-//  display: block;
-//}
+* { animation: 2s appear; }
 
 
 @keyframes appear {

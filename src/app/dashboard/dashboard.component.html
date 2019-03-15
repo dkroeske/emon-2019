@@ -1,0 +1,60 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Power@4813CT</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <div [ngSwitch]="card.component">
+        <div *ngSwitchCase="'PowerConsumed'">
+          <ng-container [ngTemplateOutlet]="consumed"></ng-container>
+        </div>
+
+        <div *ngSwitchCase="'PowerProduced'">
+          <ng-container [ngTemplateOutlet]="produced"></ng-container>
+        </div>
+
+        <div *ngSwitchDefault>
+          <ng-container [ngTemplateOutlet]="dailypowerseries"></ng-container>
+        </div>
+      </div>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<ng-template #dailypowerseries>
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        Power Today
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <app-dailypower></app-dailypower>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #produced>
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        Power Produced
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <app-live-power [signature]="signature" [index]="0"></app-live-power>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #consumed>
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title>
+        Power Consumed
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="dashboard-card-content">
+      <app-live-power [signature]="signature" [index]="1"></app-live-power>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
