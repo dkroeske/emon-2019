@@ -32,7 +32,7 @@ export class DailypowerComponent implements OnInit {
     const endDate = new Date();
     startDate.setHours(0, 0, 0, 0);
 
-    this.powerService.getPowerSeries(signature, startDate, endDate, 5)
+    this.powerService.getPowerSeries(signature, startDate, endDate, 15)
       .subscribe((powerSeries: PowerItem[]) => {
         this.powerSeries = powerSeries;
       });

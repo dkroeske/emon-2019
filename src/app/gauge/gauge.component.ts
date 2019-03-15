@@ -10,7 +10,7 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('canvas') canvasRef: ElementRef;
   @Input() value: number = 0;
-  @Input() maxValue: number = 2000;
+  @Input() maxValue: number = 4000;
   @Input() unitText: string = '--';
 
   private degrees: number = 0;
@@ -69,12 +69,12 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
 
     //
     ctx.fillStyle = 'rgba(28,167,79,1.0)';
-    ctx.font = 'normal 36px Arial';
+    ctx.font = 'normal 30px Arial';
     //let text = ((this.degrees / 240) * this.maxValue).toFixed(0);
-    const text = this.value.toFixed(0);
+    const text = this.value.toFixed(0) + 'W';
 
     ctx.fillText(text, midWidth - ctx.measureText(text).width / 2.0, midHeigth + 15);
-    ctx.font = 'lighter small-caps 18px Arial';
+    ctx.font = 'lighter small-caps 14px Arial';
     ctx.fillText(this.unitText, midWidth - ctx.measureText(this.unitText).width / 2.0, midHeigth + 15 + 30 );
 
     // Assume fps approx. 60 fps

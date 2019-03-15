@@ -10,7 +10,8 @@ import {PowerService} from './services/power.service';
 import { DailyPowerGraphComponent } from './dailypower/dailypowergraph/daily-power-graph.component';
 import { DailypowerComponent } from './dailypower/dailypower.component';
 import { GaugeComponent } from './gauge/gauge.component';
-import { PowerGaugeComponent } from './power-gauge/power-gauge.component';
+import {InfoService} from './services/info.service';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { PowerGaugeComponent } from './power-gauge/power-gauge.component';
     DailyPowerGraphComponent,
     DailypowerComponent,
     GaugeComponent,
-    PowerGaugeComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,7 @@ import { PowerGaugeComponent } from './power-gauge/power-gauge.component';
     HttpClientModule,
     MaterialModule
   ],
-  providers: [PowerService],
+  providers: [PowerService, InfoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
