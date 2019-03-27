@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-gauge',
@@ -7,13 +6,12 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./gauge.component.scss']
 })
 
-export class GaugeComponent implements AfterViewInit, OnInit, OnDestroy, OnChanges {
+export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
 
   @ViewChild('canvas') canvasRef: ElementRef;
-  @Input() width = 400;
-  @Input() height = 320;
+  @Input() width;
+  @Input() height;
   ctx: CanvasRenderingContext2D;
-  //drawingSubscription: Subscription;
 
   @Input() value: number = 0;
   @Input() maxValue: number = 4000;
@@ -31,20 +29,11 @@ export class GaugeComponent implements AfterViewInit, OnInit, OnDestroy, OnChang
 
   constructor(private ngZone: NgZone) { }
 
-  ngAfterViewInit(): void {
-
-    const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-    this.ctx = canvas.getContext('2d');
-
-    canvas.width = this.width;
-    canvas.height = this.height;
-
-    console.log('(w:h)=' + this.width + ':' + this.height );
-
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if ( !this.animation ) {
+      if ( this.value >= this.maxValue ) {
+        this.maxValue = this.value * 1.2;
+      }
       this.degreesEnd = 240.0 * this.value / this.maxValue;
       this.degreesDelta = this.degreesEnd - this.degrees;
       this.degreesCnt = 0;
@@ -64,43 +53,44 @@ export class GaugeComponent implements AfterViewInit, OnInit, OnDestroy, OnChang
   private paint() {
     if (!this.running) { return; }
 
-    const ctx = this.canvasRef.nativeElement.getContext('2d');
-    const width = ctx.canvas.width;
-    const height = ctx.canvas.height;
+    this.ctx = this.canvasRef.nativeElement.getContext('2d');
+    const width = this.ctx.canvas.width;
+    const height = this.ctx.canvas.height;
     const midWidth = width / 2.0;
     const midHeigth = height / 2.0;
 
+
     //console.log(width + ' ' + height);
 
-    ctx.clearRect(0.0, 0.0, width, height);
+    this.ctx.clearRect(0.0, 0.0, width, height);
 
     // Background Arc
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(69,136,193,1.0)';
-    ctx.lineWidth = 10;
-    ctx.arc(midWidth, midHeigth, midHeigth - 15, this.toRadians(150), this.toRadians(30), false);
-    ctx.lineCap = 'butt';
-    ctx.stroke();
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = 'rgba(69,136,193,1.0)';
+    this.ctx.lineWidth = 10;
+    this.ctx.arc(midWidth, midHeigth, midHeigth - 15, this.toRadians(150), this.toRadians(30), false);
+    this.ctx.lineCap = 'butt';
+    this.ctx.stroke();
 
     // Draw Arc
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(157,215,242,1.0)';
-    ctx.lineWidth = 15;
-    ctx.arc(midWidth, midHeigth, midHeigth - 15, this.toRadians(150), this.toRadians(150 + this.degrees), false);
-    ctx.lineCap = 'butt';
-    ctx.stroke();
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = 'rgba(157,215,242,1.0)';
+    this.ctx.lineWidth = 15;
+    this.ctx.arc(midWidth, midHeigth, midHeigth - 15, this.toRadians(150), this.toRadians(150 + this.degrees), false);
+    this.ctx.lineCap = 'butt';
+    this.ctx.stroke();
 
     //
-    ctx.fillStyle = 'rgba(28,167,79,1.0)';
+    this.ctx.fillStyle = 'rgba(28,167,79,1.0)';
 
-    ctx.font = 'normal 24px Arial';
-    ctx.fillText(this.valueLabel, midWidth - ctx.measureText(this.valueLabel).width / 2.0 - 10, midHeigth + 0);
+    this.ctx.font = 'normal 24px Arial';
+    this.ctx.fillText(this.valueLabel, midWidth - this.ctx.measureText(this.valueLabel).width / 2.0 - 10, midHeigth + 0);
 
-    ctx.font = 'normal 14px Arial';
-    ctx.fillText(this.unitLabel, midWidth + ctx.measureText(this.valueLabel).width - 10, midHeigth - 6);
+    this.ctx.font = 'normal 14px Arial';
+    this.ctx.fillText(this.unitLabel, midWidth + this.ctx.measureText(this.valueLabel).width - 10, midHeigth - 6);
 
-    ctx.font = 'lighter small-caps 14px Arial';
-    ctx.fillText(this.infoLabel, midWidth - ctx.measureText(this.infoLabel).width / 2.0, midHeigth + 20 );
+    this.ctx.font = 'lighter small-caps 14px Arial';
+    this.ctx.fillText(this.infoLabel, midWidth - this.ctx.measureText(this.infoLabel).width / 2.0, midHeigth + 20 );
 
     // Assume fps approx. 60 fps
     if (this.animation === true) {
@@ -115,14 +105,6 @@ export class GaugeComponent implements AfterViewInit, OnInit, OnDestroy, OnChang
     requestAnimationFrame( () => this.paint() );
   }
 
-  // Draw simple debug box
-  private drawDebugBox(ctx, x1, y1, x2, y2) {
-    ctx.save();
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = 'red';
-    ctx.strokeRect(x1, y1, x2, y2);
-    ctx.restore();
-  }
 
   // Omrekenen graden naar radialen
   private toRadians(degrees: number): number {

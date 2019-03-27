@@ -13,10 +13,11 @@ export class DashboardComponent implements OnInit {
 
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
+
       if (matches) {
         return [
-          { title: 'ActualPower', component: 'ActualPower', cols: 2, rows: 1 },
-          { title: 'Series Today', component: 'PowerSeries', cols: 2, rows: 1 },
+          { title: 'ActualPower', component: 'ActualPower', cols: 3, rows: 1 },
+          { title: 'Series Today', component: 'PowerSeries', cols: 3, rows: 1 },
         ];
       }
 

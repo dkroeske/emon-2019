@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {interval} from 'rxjs';
 import {PowerService} from '../services/power.service';
 import {PowerItem} from '../models/power.model';
 
-const signature = '00000000d926eb43';
+//const signature = '00000000d926eb43';
 
 @Component({
   selector: 'app-dailypower',
@@ -13,6 +13,7 @@ const signature = '00000000d926eb43';
 export class DailypowerComponent implements OnInit {
 
   powerSeries: PowerItem[];
+  @Input() signature;
 
   constructor(private powerService: PowerService) {
   }
@@ -30,7 +31,7 @@ export class DailypowerComponent implements OnInit {
     const endDate = new Date();
     startDate.setHours(0, 0, 0, 0);
 
-    this.powerService.getPowerSeries(signature, startDate, endDate, 15)
+    this.powerService.getPowerSeries(this.signature, startDate, endDate, 15)
       .subscribe((powerSeries: PowerItem[]) => {
         this.powerSeries = powerSeries;
       });

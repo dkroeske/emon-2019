@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">Power@4813CT</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="3" rowHeight="400px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <div [ngSwitch]="card.component">
 
@@ -19,14 +19,21 @@
 
 <ng-template #dailypowerseries>
   <mat-card class="dashboard-card">
+
     <mat-card-header>
-      <mat-card-title>
-        Power Today
-      </mat-card-title>
+      <div mat-card-avatar class="gauge-header-image"></div>
+      <mat-card-title>Power Series</mat-card-title>
+      <mat-card-subtitle>Powerusage today</mat-card-subtitle>
     </mat-card-header>
+
+    <app-dailypower [signature]="signature"></app-dailypower>
+
     <mat-card-content class="dashboard-card-content">
-      <app-dailypower></app-dailypower>
+      <p>
+        Graph showing daily powerusage consumed or produced.
+      </p>
     </mat-card-content>
+
   </mat-card>
 </ng-template>
 
