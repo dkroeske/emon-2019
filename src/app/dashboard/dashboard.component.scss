@@ -6,14 +6,24 @@ mat-grid-tile {
   margin: 0px;
 }
 
+//.dashboard-card {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//  background-color: brown;
+//}
+
 .dashboard-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  max-width: 400px;
+}
+
+.gauge-header-image {
+  background-image: url('https://picsum.photos/g/200');
+  background-size: cover;
 }
 
 .dashboard-card-content {
-  text-align: center;
+  //text-align: center;
 }

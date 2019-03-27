@@ -11,8 +11,11 @@ import {PowerItem} from '../models/power.model';
 export class LivePowerComponent implements OnInit {
 
   @Input() signature: '';
-  @Input() index = '';
   actualPower = 0;
+  unitLabel = '';
+  infoLabel = '';
+  valueLabel = '';
+
 
   constructor(private infoService: InfoService) {}
 
@@ -25,7 +28,24 @@ export class LivePowerComponent implements OnInit {
 
   getPolledInfo() {
     this.infoService.getInfo(this.signature).subscribe( res => {
-      this.actualPower = res.p1.instantaneous_active_power[this.index].value * 1000;
+      const pConsumed = res.p1.instantaneous_active_power[0].value;
+      const pProduced = res.p1.instantaneous_active_power[1].value;
+
+      this.actualPower = Math.abs(pConsumed - pProduced) * 1000;
+
+      if ( pConsumed >= pProduced ) {
+        this.infoLabel = 'Consuming';
+      } else {
+        this.infoLabel = 'Producing';
+      }
+
+      if ( this.actualPower > 1000 ) {
+        this.valueLabel = (this.actualPower / 1000).toFixed(2);
+        this.unitLabel = 'kW';
+      } else {
+        this.valueLabel = this.actualPower.toFixed(0);
+        this.unitLabel = 'W';
+      }
     });
   }
 

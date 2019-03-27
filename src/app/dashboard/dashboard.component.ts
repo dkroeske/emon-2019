@@ -13,18 +13,15 @@ export class DashboardComponent implements OnInit {
 
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
-      console.log(matches)
       if (matches) {
         return [
-          { title: 'Consumed', component: 'PowerConsumed', cols: 2, rows: 1 },
-          { title: 'Produced', component: 'PowerProduced', cols: 2, rows: 1 },
+          { title: 'ActualPower', component: 'ActualPower', cols: 2, rows: 1 },
           { title: 'Series Today', component: 'PowerSeries', cols: 2, rows: 1 },
         ];
       }
 
       return [
-        { title: 'Consumed', component: 'PowerConsumed', cols: 1, rows: 1 },
-        { title: 'Produced', component: 'PowerProduced', cols: 1, rows: 1 },
+        { title: 'ActualPower', component: 'ActualPower', cols: 1, rows: 1 },
         { title: 'Series Today', component: 'PowerSeries', cols: 2, rows: 1 },
       ];
     })

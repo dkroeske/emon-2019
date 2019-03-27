@@ -3,12 +3,9 @@
   <mat-grid-list cols="2" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <div [ngSwitch]="card.component">
-        <div *ngSwitchCase="'PowerConsumed'">
-          <ng-container [ngTemplateOutlet]="consumed"></ng-container>
-        </div>
 
-        <div *ngSwitchCase="'PowerProduced'">
-          <ng-container [ngTemplateOutlet]="produced"></ng-container>
+        <div *ngSwitchCase="'ActualPower'">
+          <ng-container [ngTemplateOutlet]="actualpower"></ng-container>
         </div>
 
         <div *ngSwitchDefault>
@@ -33,28 +30,22 @@
   </mat-card>
 </ng-template>
 
-<ng-template #produced>
+<ng-template #actualpower>
   <mat-card class="dashboard-card">
-    <mat-card-header>
-      <mat-card-title>
-        Power Produced
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="dashboard-card-content">
-      <app-live-power [signature]="signature" [index]="0"></app-live-power>
-    </mat-card-content>
-  </mat-card>
-</ng-template>
 
-<ng-template #consumed>
-  <mat-card class="dashboard-card">
     <mat-card-header>
-      <mat-card-title>
-        Power Consumed
-      </mat-card-title>
+      <div mat-card-avatar class="gauge-header-image"></div>
+      <mat-card-title>Actual Power</mat-card-title>
+      <mat-card-subtitle>@ this moment</mat-card-subtitle>
     </mat-card-header>
+
+    <app-live-power [signature]="signature"></app-live-power>
+
     <mat-card-content class="dashboard-card-content">
-      <app-live-power [signature]="signature" [index]="1"></app-live-power>
+      <p>
+        Gauge showing <i>actual</i> or <i>instantaneous</i> power. Will be updated approx. every 30s.
+      </p>
     </mat-card-content>
+
   </mat-card>
 </ng-template>

@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-gauge',
@@ -6,12 +7,20 @@ import { Component, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, Sim
   styleUrls: ['./gauge.component.scss']
 })
 
-export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
+export class GaugeComponent implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 
   @ViewChild('canvas') canvasRef: ElementRef;
+  @Input() width = 400;
+  @Input() height = 320;
+  ctx: CanvasRenderingContext2D;
+  //drawingSubscription: Subscription;
+
   @Input() value: number = 0;
   @Input() maxValue: number = 4000;
-  @Input() unitText: string = '--';
+  @Input() minValue: number = 0;
+  @Input() infoLabel: string = '--';
+  @Input() unitLabel: string = '--';
+  @Input() valueLabel = 'value';
 
   private degrees: number = 0;
   private degreesDelta: number = 0;
@@ -21,6 +30,18 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
   private running: boolean = false;
 
   constructor(private ngZone: NgZone) { }
+
+  ngAfterViewInit(): void {
+
+    const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
+    this.ctx = canvas.getContext('2d');
+
+    canvas.width = this.width;
+    canvas.height = this.height;
+
+    console.log('(w:h)=' + this.width + ':' + this.height );
+
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if ( !this.animation ) {
@@ -49,6 +70,8 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
     const midWidth = width / 2.0;
     const midHeigth = height / 2.0;
 
+    //console.log(width + ' ' + height);
+
     ctx.clearRect(0.0, 0.0, width, height);
 
     // Background Arc
@@ -69,13 +92,15 @@ export class GaugeComponent implements OnInit, OnDestroy, OnChanges {
 
     //
     ctx.fillStyle = 'rgba(28,167,79,1.0)';
-    ctx.font = 'normal 30px Arial';
-    //let text = ((this.degrees / 240) * this.maxValue).toFixed(0);
-    const text = this.value.toFixed(0);
 
-    ctx.fillText(text, midWidth - ctx.measureText(text).width / 2.0, midHeigth + 15);
+    ctx.font = 'normal 24px Arial';
+    ctx.fillText(this.valueLabel, midWidth - ctx.measureText(this.valueLabel).width / 2.0 - 10, midHeigth + 0);
+
+    ctx.font = 'normal 14px Arial';
+    ctx.fillText(this.unitLabel, midWidth + ctx.measureText(this.valueLabel).width - 10, midHeigth - 6);
+
     ctx.font = 'lighter small-caps 14px Arial';
-    ctx.fillText(this.unitText, midWidth - ctx.measureText(this.unitText).width / 2.0, midHeigth + 15 + 30 );
+    ctx.fillText(this.infoLabel, midWidth - ctx.measureText(this.infoLabel).width / 2.0, midHeigth + 20 );
 
     // Assume fps approx. 60 fps
     if (this.animation === true) {

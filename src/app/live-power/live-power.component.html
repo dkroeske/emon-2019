@@ -1,2 +1,9 @@
-<app-gauge [value]="actualPower" [unitText]="'Watt'"></app-gauge>
+<div class="gauge">
+  <app-gauge
+    [value]="actualPower"
+    [unitLabel]="unitLabel"
+    [infoLabel]="infoLabel"
+    [valueLabel]="valueLabel">
+  </app-gauge>
+</div>
 
