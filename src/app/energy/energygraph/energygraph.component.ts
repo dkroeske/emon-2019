@@ -66,9 +66,10 @@ export class EnergygraphComponent implements OnInit, OnChanges {
         },
         scales: {
           xAxes: [{
+            stacked: true,
             type: 'time',
             time: {
-              unit: 'hour'
+              unit: 'day'
             },
             display: true,
             gridLines: {
@@ -76,6 +77,7 @@ export class EnergygraphComponent implements OnInit, OnChanges {
             }
           }],
           yAxes: [{
+            stacked: true,
             display: true,
             gridLines: {
               display: true
