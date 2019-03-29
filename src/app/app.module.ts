@@ -12,10 +12,12 @@ import { DailypowerComponent } from './dailypower/dailypower.component';
 import { GaugeComponent } from './live-power/power-gauge/gauge.component';
 import { InfoService} from './services/info.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MyDashBoardComponent } from './my-dash-board/my-dash-board.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LivePowerComponent } from './live-power/live-power.component';
+import { ActualPowerGaugeComponent } from './live-power/actual-power-gauge/actual-power-gauge.component';
+import { EnergyComponent } from './energy/energy.component';
+import { EnergygraphComponent } from './energy/energygraph/energygraph.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,10 @@ import { LivePowerComponent } from './live-power/live-power.component';
     DailypowerComponent,
     GaugeComponent,
     DashboardComponent,
-    MyDashBoardComponent,
     LivePowerComponent,
+    ActualPowerGaugeComponent,
+    EnergyComponent,
+    EnergygraphComponent,
   ],
   imports: [
     BrowserModule,

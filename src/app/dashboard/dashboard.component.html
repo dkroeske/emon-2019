@@ -1,58 +1,25 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Power@4813CT</h1>
-  <mat-grid-list cols="3" rowHeight="400px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <div [ngSwitch]="card.component">
-
-        <div *ngSwitchCase="'ActualPower'">
-          <ng-container [ngTemplateOutlet]="actualpower"></ng-container>
-        </div>
-
-        <div *ngSwitchDefault>
-          <ng-container [ngTemplateOutlet]="dailypowerseries"></ng-container>
-        </div>
-      </div>
-
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="wrapper">
+  <div class="header">@4813CT, Breda</div>
+  <div class="content">
+    <div class="graph">
+      <app-live-power [signature]="signature"></app-live-power>
+    </div>
+    <div class="text">
+      <p>Gauge showing <i>actual</i> or <i>instantaneous</i> power. Will be updated approx. every 30s</p>
+    </div>
+    <div class="graph">
+      <app-dailypower [signature]="signature"></app-dailypower>
+    </div>
+    <div class="text">
+      <p>Graph showing daily powerusage consumed or produced.</p>
+    </div>
+    <div class="graph">
+      <app-energy [signature]="signature"></app-energy>
+    </div>
+    <div class="text">
+      <p>Graph showing monthly energy production or consumption.</p>
+    </div>
+  </div>
+  <footer class="footer">Project EMON - 2019</footer>
 </div>
 
-<ng-template #dailypowerseries>
-  <mat-card class="dashboard-card">
-
-    <mat-card-header>
-      <div mat-card-avatar class="gauge-header-image"></div>
-      <mat-card-title>Power Series</mat-card-title>
-      <mat-card-subtitle>Powerusage today</mat-card-subtitle>
-    </mat-card-header>
-
-    <app-dailypower [signature]="signature"></app-dailypower>
-
-    <mat-card-content class="dashboard-card-content">
-      <p>
-        Graph showing daily powerusage consumed or produced.
-      </p>
-    </mat-card-content>
-
-  </mat-card>
-</ng-template>
-
-<ng-template #actualpower>
-  <mat-card class="dashboard-card">
-
-    <mat-card-header>
-      <div mat-card-avatar class="gauge-header-image"></div>
-      <mat-card-title>Actual Power</mat-card-title>
-      <mat-card-subtitle>@ this moment</mat-card-subtitle>
-    </mat-card-header>
-
-    <app-live-power [signature]="signature"></app-live-power>
-
-    <mat-card-content class="dashboard-card-content">
-      <p>
-        Gauge showing <i>actual</i> or <i>instantaneous</i> power. Will be updated approx. every 30s.
-      </p>
-    </mat-card-content>
-
-  </mat-card>
-</ng-template>

@@ -1,16 +1,16 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {EnergyItem} from '../../models/energy.model';
 import { Chart } from '../../../../node_modules/chart.js';
-import {PowerItem} from '../../models/power.model';
 
 @Component({
-  selector: 'app-daily-power-graph',
-  templateUrl: './daily-power-graph.component.html',
-  styleUrls: ['./daily-power-graph.component.scss']
+  selector: 'app-energygraph',
+  templateUrl: './energygraph.component.html',
+  styleUrls: ['./energygraph.component.scss']
 })
-export class DailyPowerGraphComponent implements OnInit, OnChanges {
+export class EnergygraphComponent implements OnInit, OnChanges {
 
-  @ViewChild('lineChart') private chartRef;
-  @Input() dataSeries: PowerItem[];
+  @ViewChild('barChart') private chartRef;
+  @Input() dataSeries: EnergyItem[];
 
   chart: any;
 
@@ -22,20 +22,13 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
       const produced: number[] = [];
       const consumed: number[] = [];
 
-      this.dataSeries.forEach( item => {
-        if ( item.value >= 0 ) {
-          produced.push( item.value * 1000 );
-          consumed.push( 0 );
-        } else {
-          produced.push( 0 );
-          consumed.push( -1 * item.value * 1000 );
-        }
+      this.dataSeries.forEach( (item: EnergyItem) => {
+        produced.push( item.produced );
+        consumed.push( item.consumed );
       });
 
       this.chart.data.datasets[0].data = produced;
       this.chart.data.datasets[1].data = consumed;
-
-
       this.chart.data.labels = this.dataSeries.map( (item) => item.timestamp );
 
       this.chart.update();
@@ -45,7 +38,7 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     this.chart = new Chart(this.chartRef.nativeElement, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: [], // your labels array
         datasets: [
@@ -89,11 +82,12 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
             },
             ticks: {
               beginAtZero: true,
-              stepSize: 500
+              stepSize: 5
             },
           }],
         }
       }
     });
   }
+
 }

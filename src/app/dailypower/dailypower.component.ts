@@ -3,8 +3,6 @@ import {interval} from 'rxjs';
 import {PowerService} from '../services/power.service';
 import {PowerItem} from '../models/power.model';
 
-//const signature = '00000000d926eb43';
-
 @Component({
   selector: 'app-dailypower',
   templateUrl: './dailypower.component.html',
