@@ -24,7 +24,7 @@ export class EnergygraphComponent implements OnInit, OnChanges {
 
       this.dataSeries.forEach( (item: EnergyItem) => {
         produced.push( item.produced );
-        consumed.push( item.consumed );
+        consumed.push( -1.0 * item.consumed );
       });
 
       this.chart.data.datasets[0].data = produced;
@@ -61,12 +61,18 @@ export class EnergygraphComponent implements OnInit, OnChanges {
         ]
       },
       options: {
+        title: {
+          display: true,
+          text: 'Energy last 31 days'
+        },
         legend: {
-          display: true
         },
         scales: {
           xAxes: [{
             stacked: true,
+            ticks: {
+              beginAtZero: true
+            },
             type: 'time',
             time: {
               unit: 'day'
@@ -78,13 +84,16 @@ export class EnergygraphComponent implements OnInit, OnChanges {
           }],
           yAxes: [{
             stacked: true,
-            display: true,
-            gridLines: {
-              display: true
-            },
             ticks: {
               beginAtZero: true,
               stepSize: 5
+            },
+            scaleLabel: {
+              labelString: 'Energy [kWh]',
+              display: true
+            },
+            gridLines: {
+              display: true
             },
           }],
         }

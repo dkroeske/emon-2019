@@ -27,7 +27,7 @@ export class EnergyComponent implements OnInit {
   getPolledEnergy() {
 
     const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 7 );
+    startDate.setDate(startDate.getDate() - 31 );
     const endDate = new Date();
     startDate.setHours(0, 0, 0, 0);
     endDate.setHours(59, 59, 59, 0);

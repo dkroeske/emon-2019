@@ -68,8 +68,11 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
         ]
       },
       options: {
+        title: {
+          display: true,
+          text: 'Power today'
+        },
         legend: {
-          display: true
         },
         scales: {
           xAxes: [{
@@ -83,7 +86,10 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
             }
           }],
           yAxes: [{
-            display: true,
+            scaleLabel: {
+              labelString: 'Power [W]',
+              display: true
+            },
             gridLines: {
               display: true
             },
