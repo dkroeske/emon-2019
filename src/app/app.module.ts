@@ -15,7 +15,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LivePowerComponent } from './live-power/live-power.component';
-import { ActualPowerGaugeComponent } from './live-power/actual-power-gauge/actual-power-gauge.component';
 import { EnergyComponent } from './energy/energy.component';
 import { EnergygraphComponent } from './energy/energygraph/energygraph.component';
 
@@ -27,7 +26,6 @@ import { EnergygraphComponent } from './energy/energygraph/energygraph.component
     GaugeComponent,
     DashboardComponent,
     LivePowerComponent,
-    ActualPowerGaugeComponent,
     EnergyComponent,
     EnergygraphComponent,
   ],
