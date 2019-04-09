@@ -1,16 +1,18 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {EnergyItem} from '../../models/energy.model';
-import { Chart } from '../../../../node_modules/chart.js';
+import {Chart } from '../../../../node_modules/chart.js';
 
 @Component({
-  selector: 'app-energygraph',
-  templateUrl: './energygraph.component.html',
-  styleUrls: ['./energygraph.component.scss']
+  selector: 'app-energy-weekly-graph',
+  templateUrl: './energy-weekly-graph.component.html',
+  styleUrls: ['./energy-weekly-graph.component.scss']
 })
-export class EnergygraphComponent implements OnInit, OnChanges {
+export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
+
 
   @ViewChild('barChart') private chartRef;
   @Input() dataSeries: EnergyItem[];
+  @Input() title: string;
 
   chart: any;
 
@@ -28,7 +30,7 @@ export class EnergygraphComponent implements OnInit, OnChanges {
       });
 
       this.chart.data.datasets[0].data = produced;
-      this.chart.data.datasets[1].data = consumed;
+      //this.chart.data.datasets[1].data = consumed;
       this.chart.data.labels = this.dataSeries.map( (item) => item.startDate );
 
       this.chart.update();
@@ -50,20 +52,20 @@ export class EnergygraphComponent implements OnInit, OnChanges {
             backgroundColor: 'rgba(28,167,79,0.4)',
             fill: true
           },
-          {
-            label: 'Consumed',
-            data: [], // consumed
-            pointRadius: 0,
-            borderColor: 'rgba(69,136,193,0.6)',
-            backgroundColor: 'rgba(69,136,193,0.4)',
-            fill: true
-          },
+          // {
+          //   label: 'Consumed',
+          //   data: [], // consumed
+          //   pointRadius: 0,
+          //   borderColor: 'rgba(69,136,193,0.6)',
+          //   backgroundColor: 'rgba(69,136,193,0.4)',
+          //   fill: true
+          // },
         ]
       },
       options: {
         title: {
           display: true,
-          text: 'Energy this month'
+          text: this.title
         },
         legend: {
         },
@@ -75,7 +77,7 @@ export class EnergygraphComponent implements OnInit, OnChanges {
             },
             type: 'time',
             time: {
-               unit: 'day'
+              unit: 'day'
             },
             display: true,
             gridLines: {

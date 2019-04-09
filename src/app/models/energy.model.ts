@@ -1,6 +1,7 @@
 export class EnergyItem {
   constructor(
-    readonly timestamp: Date,
+    readonly startDate: Date,
+    readonly endDate: Date,
     readonly consumed: number,
     readonly produced: number,
     readonly unit: string

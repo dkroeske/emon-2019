@@ -1,22 +1,24 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {EnergyItem} from '../models/energy.model';
 import {EnergyService} from '../services/energy.service';
 import {interval} from 'rxjs';
-import {EnergyItem} from '../models/energy.model';
 
 @Component({
-  selector: 'app-energy',
-  templateUrl: './energy.component.html',
-  styleUrls: ['./energy.component.scss']
+  selector: 'app-energy-weekly',
+  templateUrl: './energy-weekly.component.html',
+  styleUrls: ['./energy-weekly.component.scss']
 })
-export class EnergyComponent implements OnInit {
+export class EnergyWeeklyComponent implements OnInit {
 
   energySeries: EnergyItem[];
+  title: string = '..';
 
   @Input() signature;
 
   constructor(private energyService: EnergyService) { }
 
   ngOnInit() {
+    this.title = 'Energy last 7 days';
     this.getPolledEnergy();
     interval(10000).subscribe( () => {
       this.getPolledEnergy();
@@ -24,13 +26,12 @@ export class EnergyComponent implements OnInit {
   }
 
   getPolledEnergy() {
-
     // Today
     const startDate = new Date();
-    // First day month
-    const fd = new Date(startDate.getFullYear(), startDate.getMonth(), 1, 0, 0, 0);
-    // Last day of month
-    const ld = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0, 23, 59, 59 );
+    // Today minus 7 days
+    const fd = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() - 7, 0, 0, 0 );
+    // Today
+    const ld = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 23, 59, 59 );
 
     this.energyService.getEnergySeries(this.signature, fd, ld, 'daily')
       .subscribe((energySeries: EnergyItem[]) => {

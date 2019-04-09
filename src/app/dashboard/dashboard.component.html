@@ -1,26 +1,16 @@
 <div class="wrapper">
-  <div class="header">
-    <div class="mat-headline">@4813CT, Breda</div>
-  <div class="content">
-    <div class="graph">
-      <app-live-power [signature]="signature"></app-live-power>
-    </div>
-    <div class="text">
-      <p>Gauge showing <i>actual</i> or <i>instantaneous</i> power. Will be updated approx. every 30s</p>
-    </div>
-    <div class="graph">
-      <app-dailypower [signature]="signature"></app-dailypower>
-    </div>
-    <div class="text">
-      <p>Graph showing daily powerusage consumed or produced.</p>
-    </div>
-    <div class="graph">
-      <app-energy [signature]="signature"></app-energy>
-    </div>
-    <div class="text">
-      <p>Graph showing monthly energy production or consumption.</p>
-    </div>
+  <div class="graph">
+    <app-dailypower [signature]="signature"></app-dailypower>
   </div>
-  <footer class="footer">Project EMON - 2019</footer>
+  <div class="graph">
+    <app-live-power [signature]="signature"></app-live-power>
+  </div>
+  <div class="graph">
+    <app-energy [signature]="signature"></app-energy>
+  </div>
+  <div class="graph">
+    <app-energy-weekly [signature]="signature"></app-energy-weekly>
+  </div>
 </div>
+
 

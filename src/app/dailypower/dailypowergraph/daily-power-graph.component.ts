@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import { Chart } from '../../../../node_modules/chart.js';
+//import {Chart } from '../../../../node_modules/chart.js';
+import { Chart } from 'chart.js';
 import {PowerItem} from '../../models/power.model';
 
 @Component({
@@ -72,6 +73,7 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
           display: true,
           text: 'Power today'
         },
+
         legend: {
         },
         scales: {
@@ -95,7 +97,9 @@ export class DailyPowerGraphComponent implements OnInit, OnChanges {
             },
             ticks: {
               beginAtZero: true,
-              stepSize: 500
+              // max: 10000,
+              // min: 0,
+              // stepSize: 500
             },
           }],
         }

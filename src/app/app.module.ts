@@ -17,6 +17,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { LivePowerComponent } from './live-power/live-power.component';
 import { EnergyComponent } from './energy/energy.component';
 import { EnergygraphComponent } from './energy/energygraph/energygraph.component';
+import { EnergyWeeklyComponent } from './energy-weekly/energy-weekly.component';
+import { EnergyWeeklyGraphComponent } from './energy-weekly/energy-weekly-graph/energy-weekly-graph.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { EnergygraphComponent } from './energy/energygraph/energygraph.component
     LivePowerComponent,
     EnergyComponent,
     EnergygraphComponent,
+    EnergyWeeklyComponent,
+    EnergyWeeklyGraphComponent,
   ],
   imports: [
     BrowserModule,

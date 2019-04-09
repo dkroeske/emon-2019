@@ -13,22 +13,22 @@ export class EnergyService {
 
   constructor(private http: HttpClient) {}
 
-  getEnergySeries(signature: string, startDate: Date, endDate: Date): Observable<EnergyItem[]> {
+  getEnergySeries(signature: string, startDate: Date, endDate: Date, interval: string = 'monthly'): Observable<EnergyItem[]> {
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     let params = new HttpParams();
 
     signature ? params = params.append('signature', signature) : {};
+    interval ? params = params.append('interval', interval) : {};
     startDate ? params = params.append('startDate', startDate.toISOString()) : {};
     endDate ? params = params.append('endDate', endDate.toISOString()) : {};
-
 
     return this.http.get<any>(this.url + '/api/energySeries', {headers: headers, params: params})
       .pipe(
         map( (data) => {
           return data.map( (item) => {
-            const energyItem = new EnergyItem(item.date, item.e_cons, item.e_prod, item.unit);
+            const energyItem = new EnergyItem(item.interval.start, item.interval.end, item.e_cons, item.e_prod, item.unit);
             return energyItem;
           });
         })

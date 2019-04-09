@@ -1,6 +1,11 @@
 //Leaf Electrical
 * { animation: 2s appear; }
 
+.container {
+  max-width: 940px;
+  display: grid;
+  grid-gap: 10px;
+}
 
 @keyframes appear {
   from {
