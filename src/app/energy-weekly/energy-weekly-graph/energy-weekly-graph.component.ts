@@ -30,8 +30,10 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
       });
 
       this.chart.data.datasets[0].data = produced;
-      //this.chart.data.datasets[1].data = consumed;
-      this.chart.data.labels = this.dataSeries.map( (item) => item.startDate );
+      this.chart.data.datasets[1].data = consumed;
+      this.chart.data.labels = this.dataSeries.map( (item) => {
+        return item.startDate;
+      } );
 
       this.chart.update();
     }
@@ -52,14 +54,14 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
             backgroundColor: 'rgba(28,167,79,0.4)',
             fill: true
           },
-          // {
-          //   label: 'Consumed',
-          //   data: [], // consumed
-          //   pointRadius: 0,
-          //   borderColor: 'rgba(69,136,193,0.6)',
-          //   backgroundColor: 'rgba(69,136,193,0.4)',
-          //   fill: true
-          // },
+          {
+            label: 'Consumed',
+            data: [], // consumed
+            pointRadius: 0,
+            borderColor: 'rgba(69,136,193,0.6)',
+            backgroundColor: 'rgba(69,136,193,0.4)',
+            fill: true
+          },
         ]
       },
       options: {
@@ -68,17 +70,34 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
           text: this.title
         },
         legend: {
+          position: 'top',
+          labels: {
+            usePointStyle: true
+          }
         },
         scales: {
           xAxes: [{
             stacked: true,
-            ticks: {
-              beginAtZero: true
-            },
+            offset: true,
             type: 'time',
-            time: {
-              unit: 'day'
+            ticks: {
+              beginAtZero: true,
+              fontSize: 12,
+              fontFamily: 'HelveticaNeue, HelveticaNeue, Roboto, ArialRounded',
+              autoSkip: false,
+              minor: {
+                fontSize: 12,
+              }
             },
+            time: {
+              unit: 'day',
+              round: 'day',
+              displayFormats: {
+                day: 'D MMM'
+              },
+              unitStepSize: 1
+            },
+            tooltipFormat: 'D MMM YYYY',
             display: true,
             gridLines: {
               display: true
@@ -88,7 +107,12 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
             stacked: true,
             ticks: {
               beginAtZero: true,
-              // stepSize: 5
+              fontSize: 12,
+              fontFamily: 'HelveticaNeue, HelveticaNeue, Roboto, ArialRounded',
+              autoSkip: false,
+              minor: {
+                fontSize: 12,
+              }
             },
             scaleLabel: {
               labelString: 'Energy [kWh]',

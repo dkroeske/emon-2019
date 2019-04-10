@@ -66,17 +66,34 @@ export class EnergygraphComponent implements OnInit, OnChanges {
           text: 'Energy this month'
         },
         legend: {
+          position: 'top',
+          labels: {
+            usePointStyle: true
+          }
         },
         scales: {
           xAxes: [{
             stacked: true,
-            ticks: {
-              beginAtZero: true
-            },
+            offset: true,
             type: 'time',
-            time: {
-               unit: 'day'
+            ticks: {
+              beginAtZero: true,
+              fontSize: 12,
+              fontFamily: 'HelveticaNeue, HelveticaNeue, Roboto, ArialRounded',
+              autoSkip: false,
+              minor: {
+                fontSize: 12,
+              }
             },
+            time: {
+              unit: 'day',
+              round: 'day',
+              displayFormats: {
+                day: 'D MMM'
+              },
+              //unitStepSize: 1
+            },
+            tooltipFormat: 'D MMM YYYY',
             display: true,
             gridLines: {
               display: true
@@ -86,7 +103,12 @@ export class EnergygraphComponent implements OnInit, OnChanges {
             stacked: true,
             ticks: {
               beginAtZero: true,
-              // stepSize: 5
+              fontSize: 12,
+              fontFamily: 'HelveticaNeue, HelveticaNeue, Roboto, ArialRounded',
+              autoSkip: false,
+              minor: {
+                fontSize: 12,
+              }
             },
             scaleLabel: {
               labelString: 'Energy [kWh]',
