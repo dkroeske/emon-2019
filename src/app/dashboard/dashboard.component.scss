@@ -10,3 +10,11 @@
   display: grid;
   min-width: 0;
 }
+
+.wrapper .graph-yearly {
+  grid-column: 1 / span 2;
+  padding: 10px;
+  border: 1px dotted green;
+  display: grid;
+  min-width: 0;
+}
