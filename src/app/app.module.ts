@@ -15,10 +15,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { LivePowerComponent } from './live-power/live-power.component';
-import { EnergyComponent } from './energy/energy.component';
-import { EnergygraphComponent } from './energy/energygraph/energygraph.component';
 import { EnergyWeeklyComponent } from './energy-weekly/energy-weekly.component';
 import { EnergyWeeklyGraphComponent } from './energy-weekly/energy-weekly-graph/energy-weekly-graph.component';
+import { EnergyMonthlyComponent } from './energy-monthly/energy-monthly.component';
+import { EnergyMonthlyGraphComponent } from './energy-monthly/energy-monthly-graph/energy-monthly-graph.component';
+import { EnergyYearlyGraphComponent } from './energy-yearly/energy-yearly-graph/energy-yearly-graph.component';
+import { EnergyYearlyComponent } from './energy-yearly/energy-yearly.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +30,12 @@ import { EnergyWeeklyGraphComponent } from './energy-weekly/energy-weekly-graph/
     GaugeComponent,
     DashboardComponent,
     LivePowerComponent,
-    EnergyComponent,
-    EnergygraphComponent,
     EnergyWeeklyComponent,
     EnergyWeeklyGraphComponent,
+    EnergyMonthlyComponent,
+    EnergyMonthlyGraphComponent,
+    EnergyYearlyGraphComponent,
+    EnergyYearlyComponent,
   ],
   imports: [
     BrowserModule,

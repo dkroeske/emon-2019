@@ -2,34 +2,35 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@an
 import {EnergyItem} from '../../models/energy.model';
 import { Chart } from '../../../../node_modules/chart.js';
 
-@Component({
-  selector: 'app-energygraph',
-  templateUrl: './energygraph.component.html',
-  styleUrls: ['./energygraph.component.scss']
-})
-export class EnergygraphComponent implements OnInit, OnChanges {
 
-  @ViewChild('barChart') private chartRef;
+@Component({
+  selector: 'app-energy-monthly-graph',
+  templateUrl: './energy-monthly-graph.component.html',
+  styleUrls: ['./energy-monthly-graph.component.scss']
+})
+export class EnergyMonthlyGraphComponent implements OnInit, OnChanges {
+
+  @ViewChild('energyBarChart') private chartRef;
   @Input() dataSeries: EnergyItem[];
 
-  chart: any;
+  private chart: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnChanges( changes: SimpleChanges ) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.dataSeries.firstChange === false) {
 
       const produced: number[] = [];
       const consumed: number[] = [];
 
-      this.dataSeries.forEach( (item: EnergyItem) => {
-        produced.push( item.produced );
-        consumed.push( -1.0 * item.consumed );
+      this.dataSeries.forEach((item: EnergyItem) => {
+        produced.push(item.produced);
+        consumed.push(-1.0 * item.consumed);
       });
 
       this.chart.data.datasets[0].data = produced;
       this.chart.data.datasets[1].data = consumed;
-      this.chart.data.labels = this.dataSeries.map( (item) => item.startDate );
+      this.chart.data.labels = this.dataSeries.map((item) => item.startDate);
 
       this.chart.update();
     }
@@ -91,7 +92,6 @@ export class EnergygraphComponent implements OnInit, OnChanges {
               displayFormats: {
                 day: 'D MMM'
               },
-              //unitStepSize: 1
             },
             tooltipFormat: 'D MMM YYYY',
             display: true,
@@ -122,5 +122,4 @@ export class EnergygraphComponent implements OnInit, OnChanges {
       }
     });
   }
-
 }

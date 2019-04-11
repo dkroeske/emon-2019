@@ -1,38 +1,36 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {EnergyItem} from '../../models/energy.model';
-import {Chart } from '../../../../node_modules/chart.js';
+import { Chart } from '../../../../node_modules/chart.js';
+
 
 @Component({
-  selector: 'app-energy-weekly-graph',
-  templateUrl: './energy-weekly-graph.component.html',
-  styleUrls: ['./energy-weekly-graph.component.scss']
+  selector: 'app-energy-yearly-graph',
+  templateUrl: './energy-yearly-graph.component.html',
+  styleUrls: ['./energy-yearly-graph.component.scss']
 })
-export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
+export class EnergyYearlyGraphComponent implements OnInit, OnChanges {
 
-  @ViewChild('barChart') private chartRef;
+  @ViewChild('energyBarChart') private chartRef;
   @Input() dataSeries: EnergyItem[];
-  @Input() title: string;
 
-  chart: any;
+  private chart: any;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnChanges( changes: SimpleChanges ) {
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.dataSeries.firstChange === false) {
 
       const produced: number[] = [];
       const consumed: number[] = [];
 
-      this.dataSeries.forEach( (item: EnergyItem) => {
-        produced.push( item.produced );
-        consumed.push( -1.0 * item.consumed );
+      this.dataSeries.forEach((item: EnergyItem) => {
+        produced.push(item.produced);
+        consumed.push(-1.0 * item.consumed);
       });
 
       this.chart.data.datasets[0].data = produced;
       this.chart.data.datasets[1].data = consumed;
-      this.chart.data.labels = this.dataSeries.map( (item) => {
-        return item.startDate;
-      } );
+      this.chart.data.labels = this.dataSeries.map((item) => item.startDate);
 
       this.chart.update();
     }
@@ -66,7 +64,7 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
       options: {
         title: {
           display: true,
-          text: this.title
+          text: 'Energy this year'
         },
         legend: {
           position: 'top',
@@ -89,12 +87,11 @@ export class EnergyWeeklyGraphComponent implements OnInit, OnChanges {
               }
             },
             time: {
-              unit: 'day',
-              round: 'day',
+              unit: 'month',
+              round: 'month',
               displayFormats: {
-                day: 'D MMM'
+                day: 'MMM'
               },
-              unitStepSize: 1
             },
             tooltipFormat: 'D MMM YYYY',
             display: true,

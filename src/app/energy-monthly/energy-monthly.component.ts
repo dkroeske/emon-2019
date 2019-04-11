@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {EnergyItem} from '../models/energy.model';
 import {EnergyService} from '../services/energy.service';
 import {interval} from 'rxjs';
-import {EnergyItem} from '../models/energy.model';
 
 @Component({
-  selector: 'app-energy',
-  templateUrl: './energy.component.html',
-  styleUrls: ['./energy.component.scss']
+  selector: 'app-energy-monthly',
+  templateUrl: './energy-monthly.component.html',
+  styleUrls: ['./energy-monthly.component.scss']
 })
-export class EnergyComponent implements OnInit {
+export class EnergyMonthlyComponent implements OnInit {
 
   energySeries: EnergyItem[];
 
